@@ -1,0 +1,162 @@
+{
+  "name": "panwriter",
+  "productName": "PanWriter",
+  "version": "0.8.4",
+  "description": "Markdown editor with pandoc integration and paginated preview",
+  "homepage": ".",
+  "main": "build/electron/main.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
+    "postinstall": "cp node_modules/pagedjs/dist/paged.polyfill.js public && cp -r node_modules/katex/dist/ public/katex && cp node_modules/markdown-it-texmath/css/texmath.css public/katex",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src",
+    "tsc": "tsc",
+    "electron": "electron .",
+    "electron:tsc": "tsc -p electron",
+    "electron:dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && yarn run electron:tsc -w\" \"wait-on http://localhost:3000 && yarn run electron:tsc -p electron && ELECTRON_IS_DEV=1 electron .\"",
+    "electron:build": "yarn build && yarn run electron:tsc",
+    "dist": "yarn run electron:build && electron-builder",
+    "dist-all": "electron-builder -mlw",
+    "release": "electron-builder -mlw --publish always",
+    "website:build": "BUILD_PATH=try PUBLIC_URL='/try' INLINE_RUNTIME_CHUNK=false react-scripts build"
+  },
+  "repository": "https://github.com/mb21/panwriter",
+  "keywords": [
+    "markdown",
+    "editor"
+  ],
+  "author": "Mauro Bieg",
+  "License": "GPL-3.0-or-later",
+  "publish": "github",
+  "private": true,
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "chrome 94"
+    ],
+    "development": [
+      "chrome 94"
+    ]
+  },
+  "build": {
+    "extends": null,
+    "files": [
+      "build/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "appId": "com.panwriter.app",
+    "fileAssociations": [
+      {
+        "ext": "md"
+      },
+      {
+        "ext": "markdown"
+      },
+      {
+        "ext": "txt"
+      },
+      {
+        "ext": "html"
+      },
+      {
+        "ext": "docx"
+      },
+      {
+        "ext": "odt"
+      },
+      {
+        "ext": "tex"
+      }
+    ],
+    "mac": {
+      "icon": "icons/icon.png",
+      "defaultArch": "universal",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "icon": "icons/icon.ico"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false
+    },
+    "linux": {
+      "icon": "icons/icon.png",
+      "desktop": {
+        "Name": "PanWriter",
+        "Comment": "Markdown editor with pandoc integration and paginated preview"
+      },
+      "category": "Utility",
+      "target": [
+        "AppImage"
+      ]
+    }
+  },
+  "dependencies": {
+    "codemirror": "^5.61.0",
+    "electron-updater": "^4.6.1",
+    "fix-path": "^3.0.0",
+    "js-yaml": "^4.1.0",
+    "katex": "^0.13.0",
+    "markdown-it": "^12.3.2",
+    "markdown-it-attrs": "^4.1.0",
+    "markdown-it-bracketed-spans": "^1.0.1",
+    "markdown-it-container": "^3.0.0",
+    "markdown-it-deflist": "^2.0.3",
+    "markdown-it-footnote": "^3.0.1",
+    "markdown-it-gridtables": "^0.3.0",
+    "markdown-it-implicit-figures": "^0.9.0",
+    "markdown-it-pandoc": "^2.1.0",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-texmath": "^0.8.0",
+    "pagedjs": "0.1.43",
+    "react": "^17.0.1",
+    "react-codemirror2": "^7.2.1",
+    "react-color": "^2.19.3",
+    "react-dom": "^17.0.1",
+    "react-scripts": "5.0.0"
+  },
+  "devDependencies": {
+    "@types/codemirror": "^0.0.102",
+    "@types/js-yaml": "^4.0.5",
+    "@types/markdown-it": "^12.0.3",
+    "@types/react": "^16.9.53",
+    "@types/react-color": "^3.0.4",
+    "@types/react-dom": "^16.9.8",
+    "concurrently": "^6.4.0",
+    "electron": "^18.0.1",
+    "electron-builder": "^23.0.3",
+    "raw-loader": "^4.0.2",
+    "typescript": "^4.5.5",
+    "wait-on": "^6.0.0"
+  },
+  "volta": {
+    "node": "16.13.1"
+  }
+}
