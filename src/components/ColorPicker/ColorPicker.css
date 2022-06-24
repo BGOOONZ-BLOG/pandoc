@@ -1,0 +1,34 @@
+.colorpicker input {
+  width: 4.5em;
+}
+.colorpicker .rectangle {
+  display: inline-block;
+  height: 19px;
+  width:  19px;
+  vertical-align: middle;
+  margin-left: 0.25em;
+  margin-bottom: 2px;
+  cursor: pointer;
+  border: 1px solid var(--input-border-color);
+}
+.colorpicker .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.colorpicker .sketch-picker {
+  position: absolute;
+  background-color: var(--overlay-background-color) !important;
+  border-radius: 10px !important;
+  padding-bottom: 6px !important;
+}
+.colorpicker .sketch-picker label {
+  color: var(--font-color) !important;
+}
+.colorpicker .sketch-picker input {
+  box-shadow: none !important;
+  border: 1px solid var(--input-border-color) !important;
+  border-bottom: 1px solid var(--input-border-bottom-color) !important;
+}

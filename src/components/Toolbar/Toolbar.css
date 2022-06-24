@@ -1,0 +1,140 @@
+.toolbar {
+  position: fixed;
+  z-index: 99999;
+  height: 40px;
+  width: 100vw;
+}
+
+.toolbar > .toolbararea {
+  font-family: var(--system-font);
+  font-size: 13px;
+  grid-template-rows: 38px;
+  overflow: hidden;
+  -webkit-app-region: drag;
+  background: var(--overlay-background-color);
+  border-bottom: 1px solid var(--separator-color);
+  transition: opacity 0.2s ease-out;
+  opacity: 0;
+  display: grid;
+  grid-template-columns: max-content minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+  grid-column-gap: 5px;
+  align-items: center;
+}
+.toolbar:hover > .toolbararea {
+  transition: opacity 0.12s ease-in;
+  opacity: 1;
+}
+
+/* Place an invisible block where the macOS .windowbuttons are going to be
+ * to push the other stuff to the right away on very small windows */
+._macOS .toolbar > .toolbararea::before {
+  display: block;
+  width: 70px;
+  content: ' ';
+}
+
+.toolbar .windowbuttons {
+  position: fixed;
+  top: 5px;
+  left: 8px;
+  display: none;
+}
+._macOS .windowbuttons {
+  display: flex;
+  margin-top: 7px;
+}
+._macOS .windowbuttons > div {
+  -webkit-app-region: no-drag;
+  cursor: default;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  margin-top: 1px;
+  margin-left: 5px;
+  margin-right: 4px;
+  line-height: 0;
+}
+._macOS .windowbuttons > div:nth-child(1) {
+  background-color: rgb(255, 95, 87);
+  border-color: rgb(226, 70, 63);
+}
+._macOS .windowbuttons > div:nth-child(2) {
+  background-color: rgb(255, 189, 46);
+  border-color: rgb(225, 161, 22);
+}
+._macOS .windowbuttons > div:nth-child(3) {
+  background-color: rgb(40, 201, 64);
+  border-color: rgb(18, 172, 40);
+}
+._macOS .windowbuttons img {
+  display: none;
+}
+._macOS .windowbuttons:hover img {
+  display: inline;
+}
+
+.toolbar img {
+  -webkit-user-drag: none;
+}
+
+.toolbar .filename {
+  color: var(--filename-font-color);
+  grid-column-start: 3;
+  max-height: 30px;
+  cursor: default;
+}
+
+.toolbar .edited {
+  color: var(--edited-font-color);
+}
+
+.toolbar .btns {
+  margin-left: auto;
+}
+.toolbar .btns > * {
+  display: inline-block;
+}
+
+.toolbar button {
+  -webkit-app-region: no-drag;
+  cursor: default;
+  height: 24px;
+  background: none;
+  font-size: 13px;
+  line-height: 5px;
+  margin-right: 5px;
+  border: 0;
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+.toolbar button:hover,
+.toolbar button:active,
+.toolbar button.active {
+  background: var(--button-active-color);
+}
+.toolbar button:active:hover,
+.toolbar button.active:hover {
+  background: var(--button-active-onhover-color);
+}
+
+.toolbar button img {
+  height: 20px;
+}
+
+.toolbar .leftbtns {
+  margin-left: 5px;
+}
+
+.toolbar .btngroup button:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+}
+.toolbar .btngroup button:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
+}
